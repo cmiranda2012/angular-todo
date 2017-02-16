@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Todo App</title>
+
+    <!-- angular material design -->
+    <link rel="stylesheet" href="angular-material/angular-material.css">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body ng-app="todo" ng-controller="mainController" layout="column" layout-align="center center">   
+
+     <md-toolbar layout="row" layout-align="center">
+        <h1><strong>Todo App - <span id="todoItems" flex="">{{todos.length}}</span></strong></h1>
+     </md-toolbar>
+
+    <div flex layout="row" id="mainBody">
+        <md-content class="md-padding">
+            <form ng-click="createTodo()">
+                <div layout="row" layout-align="center">
+                    <md-input-container flex="90">
+                        <label>Add todo item</label>
+                        <input ng-model="todoData.text" placeholder="Grocery Shopping">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <md-button type="submit" class="md-raised md-primary">
+                            <strong>Add</strong>
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </form>
+        
+            <div>
+                <ul>
+                    <li ng-repeat="todo in todos">
+                        <md-checkbox ng-click="deleteTodo(todo._id)">
+                            {{todo.text}}
+                        </md-checkbox>
+                    </li>
+                </ul>
+            </div>
+        </md-content>
+     </div>
+
+    <!-- angular -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-animate/angular-animate.js"></script>
+    <script src="angular-aria/angular-aria.js"></script>
+    <script src="angular-material/angular-material.js"></script>
+    <script src="core.js"></script>
+
+</body>
+</html>

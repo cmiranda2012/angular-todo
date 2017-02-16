@@ -1,0 +1,52 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  height:100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  list-style: none;
+}
+
+#todoItems {
+	border-radius: 4px;
+	color: #2196f3;
+	background: white;
+	padding: 5px 20px;
+
+}
+
+md-toolbar h1 {
+  margin: auto;
+  position: relative;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+#mainBody{
+  min-width: 400px;
+}
+
+md-content{
+  width:100%;
+}
+
+/* Utils */
+
+.content-wrapper {
+  position: relative;
+}
+
+@media (min-width: 800px) {
+  #mainBody {
+    width:800px;
+  } 
+}
+
+@media (max-width: 799px) {
+  #mainBody {
+    width:100%;
+  } 
+}
