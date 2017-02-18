@@ -3,16 +3,33 @@ const Todo = require('./models/todo');
 
 module.exports = function(app) {
 
-    // get all todos
+    // get all active items
     app.get('/api/todos', function(req, res) {
 
-        Todo.find(function(err, todos) {
+        Todo.find({
+            done: false
+        }, function(err, active) {
 
             if (err) {
                 return res.send(err);
             }
 
-            res.json(todos);
+            res.json(active);
+        });
+    });
+
+    // get all completed items
+    app.get('/api/todos/completed', function(req, res) {
+
+        Todo.find({
+            done: true
+        }, function(err, completed) {
+
+            if (err) {
+                return res.send(err);
+            }
+
+            res.json(completed);
         });
     });
 
@@ -28,7 +45,9 @@ module.exports = function(app) {
                 return res.send(err);
             }
 
-            Todo.find(function(err, todos) {
+            Todo.find({
+                done: false
+            }, function(err, todos) {
 
                 if (err) {
                     return res.send(err);
@@ -39,24 +58,46 @@ module.exports = function(app) {
         });
     });
 
-    // delete todo once checked
-    app.delete('/api/todos/:todo_id', function(req, res) {
+    // updates done flag of given todo once checked
+    app.put('/api/todos/:todo_id', function(req, res) {
 
-        Todo.remove({
+        Todo.findOneAndUpdate({
             _id: req.params.todo_id
+        }, {
+            done: true
         }, function(err, todo) {
 
             if (err) {
                 return res.send(err);
             }
 
-            Todo.find(function(err, todos) {
+            Todo.find({
+                done: false
+            }, function(err, todos) {
 
                 if (err) {
                     return res.send(err);
                 }
 
                 res.json(todos);
+            });
+        });
+    });
+
+    // delete all completed items
+    app.delete('/api/todos', function(req, res) {
+
+        Todo.remove({
+            done: true
+        }, function(err) {
+
+            if (err) {
+                return res.send(err);
+            }
+
+            res.json({
+                success: true,
+                msg: 'All completed items deleted.'
             });
         });
     });

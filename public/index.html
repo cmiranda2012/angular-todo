@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Todo App</title>
+    <title>Todo-List App</title>
 
     <!-- angular material design -->
     <link rel="stylesheet" href="angular-material/angular-material.css">
@@ -18,10 +18,10 @@
 <body ng-app="todo" ng-controller="mainController" layout="column" layout-align="center center">   
 
      <md-toolbar layout="row" layout-align="center">
-        <h1><strong>Todo App - <span id="todoItems" flex="">{{todos.length}}</span></strong></h1>
+        <h1><strong>Todo-List App - <span id="todoItems" flex="">{{todos.length}}</span></strong></h1>
      </md-toolbar>
 
-    <div flex layout="row" id="mainBody">
+    <div ng-cloack="" flex layout="row" id="mainBody">
         <md-content class="md-padding">
             <form>
                 <div layout-gt-xs="row" layout-align="center center">
@@ -38,17 +38,35 @@
                 </div>
             </form>
         
-            <div>
-                <ul>
-                    <li ng-repeat="todo in todos">
-                        <md-checkbox ng-click="deleteTodo(todo._id)">
-                            {{todo.text}}
+            <md-tabs md-dynamic-height="" md-border-bottom="">
+              <md-tab label="Active">
+                <md-content class="md-padding">
+                    <ul>
+                        <li ng-repeat="todo in todos">
+                            <md-checkbox ng-click="updateTodo(todo._id)">
+                                {{todo.text}}
+                            </md-checkbox>
+                        </li>
+                    </ul>
+                </md-content>
+              </md-tab>
+              <md-tab label="Completed" ng-click="completedItems()">
+                <md-content class="md-padding">
+                    <ul>
+                        <li ng-repeat="complete in completed">
+                        <md-checkbox ng-model="checked">
+                            {{complete.text}}
                         </md-checkbox>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                    <md-button type="submit" class="md-raised md-warn" ng-click="clearCompleted()">
+                        <strong>Clear</strong>
+                    </md-button>
+                </md-content>
+              </md-tab>
+            </md-tabs>
         </md-content>
-     </div>
+    </div>
 
     <!-- angular -->
     <script src="angular/angular.js"></script>
