@@ -1,20 +1,22 @@
-var express  = require('express');
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-
-var app = express();
+const express  = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 8081;
+const config = require('./config/db');
+const app = express();
 
 // configuration 
-mongoose.connect('mongodb://camrfn21:gatito89@ds153239.mlab.com:53239/todolist');
+mongoose.connect(config.database);
 
+// express app
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-require('./app/routes/routes.js')(app);
+require('./app/routes.js')(app);
 
-app.listen(8080, function() {
-	console.log("App running on port 8080");
+app.listen(port, function() {
+	console.log(`App running on port ${port}`);
 });

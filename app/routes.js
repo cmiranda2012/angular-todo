@@ -1,15 +1,15 @@
 //routes
-const Todo = require('../models/todo.js');
+const Todo = require('./models/todo');
 
 module.exports = function(app) {
-    
+
     // get all todos
     app.get('/api/todos', function(req, res) {
 
         Todo.find(function(err, todos) {
 
             if (err) {
-                res.send(err);
+                return res.send(err);
             }
 
             res.json(todos);
@@ -24,14 +24,14 @@ module.exports = function(app) {
             done: false
         }, function(err, todo) {
 
-            if(err) {
-                res.send(err);
+            if (err) {
+                return res.send(err);
             }
 
             Todo.find(function(err, todos) {
 
-                if(err) {
-                    res.send(err);
+                if (err) {
+                    return res.send(err);
                 }
 
                 res.json(todos);
@@ -46,14 +46,14 @@ module.exports = function(app) {
             _id: req.params.todo_id
         }, function(err, todo) {
 
-            if(err) {
-                res.send(err);
+            if (err) {
+                return res.send(err);
             }
 
             Todo.find(function(err, todos) {
 
                 if (err) {
-                    res.send(err);
+                    return res.send(err);
                 }
 
                 res.json(todos);
