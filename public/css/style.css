@@ -9,13 +9,8 @@ html, body {
 ul {
   list-style: none;
 }
-
-#todoItems {
-	border-radius: 4px;
-	color: #2196f3;
-	background: white;
-	padding: 5px 20px;
-
+md-toolbar {
+  padding: 30px 0px;
 }
 
 md-toolbar h1 {
@@ -25,15 +20,20 @@ md-toolbar h1 {
   font-family: 'Roboto', sans-serif;
 }
 
-#mainBody{
-  min-width: 400px;
-}
-
 md-content{
   width:100%;
 }
 
-/* Utils */
+#todoItems {
+	border-radius: 4px;
+	color: #2196f3;
+	background: white;
+	padding: 5px 20px;
+}
+
+#mainBody{
+  min-width: 400px;
+}
 
 .content-wrapper {
   position: relative;
