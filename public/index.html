@@ -15,13 +15,13 @@
 
 </head>
 
-<body ng-app="todo" ng-controller="mainController" layout="column" layout-align="center center">   
+<body ng-app="todo" ng-cloak ng-controller="mainController" layout="column" layout-align="center center">   
 
      <md-toolbar layout="row" layout-align="center">
         <h1><strong>Todo-List App - <span id="todoItems" flex="">{{todos.length}}</span></strong></h1>
      </md-toolbar>
 
-    <div ng-cloack="" flex layout="row" id="mainBody">
+    <div flex layout="row" id="mainBody">
         <md-content class="md-padding">
             <form>
                 <div layout-gt-xs="row" layout-align="center center">
@@ -39,7 +39,7 @@
             </form>
         
             <md-tabs md-dynamic-height="" md-border-bottom="">
-              <md-tab label="Active">
+              <md-tab label="Active" md-active="true" ng-click="displayTodos(false)">
                 <md-content class="md-padding">
                     <ul>
                         <li ng-repeat="todo in todos">
@@ -50,7 +50,7 @@
                     </ul>
                 </md-content>
               </md-tab>
-              <md-tab label="Completed" ng-click="completedItems()">
+              <md-tab label="Completed" ng-click="displayTodos(true)">
                 <md-content class="md-padding">
                     <ul>
                         <li ng-repeat="complete in completed">

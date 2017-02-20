@@ -3,11 +3,11 @@ const Todo = require('./models/todo');
 
 module.exports = function(app) {
 
-    // get all active items
+    // get items
     app.get('/api/todos', function(req, res) {
 
         Todo.find({
-            done: false
+            done: req.query.done
         }, function(err, active) {
 
             if (err) {
@@ -15,21 +15,6 @@ module.exports = function(app) {
             }
 
             res.json(active);
-        });
-    });
-
-    // get all completed items
-    app.get('/api/todos/completed', function(req, res) {
-
-        Todo.find({
-            done: true
-        }, function(err, completed) {
-
-            if (err) {
-                return res.send(err);
-            }
-
-            res.json(completed);
         });
     });
 

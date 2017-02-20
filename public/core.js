@@ -15,14 +15,24 @@
 
             $scope.checked = true;
 
-            // GET all todos
-            $http.get('/api/todos')
-                .success(function(data) {
-                    $scope.todos = data;
-                })
-                .error(function(data) {
-                    console.log(`Error: ${data}`);
-                });
+            // GET todos
+            $scope.displayTodos = function(value) {
+                $http.get('/api/todos', {
+                        params: {
+                            done: value
+                        }
+                    })
+                    .success(function(data) {
+                        if (value === false) {
+                            $scope.todos = data;
+                        } else {
+                            $scope.completed = data;
+                        }
+                    })
+                    .error(function(data) {
+                        console.log(`Error: ${data}`);
+                    });
+            };
 
             // CREATE todo
             $scope.createTodo = function() {
@@ -44,21 +54,9 @@
             // Update checked todo
             $scope.updateTodo = function(id) {
 
-                $http.put('/api/todos/' + id)
+                $http.put(`/api/todos/${id}`)
                     .success(function(data) {
                         $scope.todos = data;
-                    })
-                    .error(function(data) {
-                        console.log(`Error: ${data}`);
-                    });
-            };
-
-            // Get all completed items
-            $scope.completedItems = function() {
-
-                $http.get('/api/todos/completed')
-                    .success(function(data) {
-                        $scope.completed = data;
                     })
                     .error(function(data) {
                         console.log(`Error: ${data}`);
